@@ -1,0 +1,11 @@
+<div class="h-screen bg-zinc-300 p-4">
+    <app-standard-button title="New Thread" iconName="cssAdd"></app-standard-button>
+    <div class="h-2"></div>
+    <app-searcher></app-searcher>
+    <div class="h-4"></div>
+    
+    <div *ngFor="let thread of threads">
+        <app-thread-card [threadObject]="thread"></app-thread-card>
+        <div class="h-2"></div>
+    </div>
+</div>

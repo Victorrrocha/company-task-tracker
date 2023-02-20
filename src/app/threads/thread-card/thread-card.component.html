@@ -1,0 +1,5 @@
+<app-card customClasses="flex-col items-start">
+    <p class="text-lg">{{threadObject?.title}}</p>
+    <p class="text-sm">{{threadObject?.tags}}</p>
+    <p appInteractable class="w-full text-end">{{following ? "Unfollow" : "Follow"}}</p>
+</app-card>
