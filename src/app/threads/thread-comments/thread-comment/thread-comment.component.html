@@ -1,0 +1,29 @@
+<div >
+    <div class="flex items-baseline">
+        <div class="w-[50px]">
+            <app-initials-icon initials="KF" customClasses="small"></app-initials-icon>
+        </div>
+        <p class="text-sm font-bold">{{comment?.author}} - {{comment?.id}}</p>
+    </div>
+    <div class="flex">
+        <div class="w-[50px] text-center">
+            <span class="inline-block w-[2px] h-[100%] bg-slate-200"></span>
+        </div>
+        <div>
+            <p>{{comment?.message}}</p>
+
+            <div *ngIf="inReplyMode">
+                <input class="reply-input" type="text" [formControl]="newComment">
+            </div>
+
+            <div class="flex">
+                <span *ngIf="!inReplyMode" (click)="activateReplyMode(comment?.id)" appInteractable class="text-sm font-semibold text-slate-500">Reply</span>
+                <span *ngIf="inReplyMode" (click)="postComment()" appInteractable class="text-sm font-semibold text-slate-500 mr-4">Post</span>
+                <span *ngIf="inReplyMode" (click)="deactivateReplyMode(comment?.id)" appInteractable class="text-sm font-semibold text-slate-500">Cancel</span>
+            </div>
+            <div class="replies mt-2" *ngIf="hasReplies">
+                <app-thread-comments [commentsId]="comment?.repliesId"></app-thread-comments>
+            </div>
+        </div>
+    </div>
+</div>

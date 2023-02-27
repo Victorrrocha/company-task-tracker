@@ -1,1 +1,11 @@
-<p>thread-page works!</p>
+<div class="px-16 py-8">
+    <div class="flex mb-4">
+        <span class="bg-secondary p-1 mr-1 text-white rounded text-[12px]" *ngFor="let tag of thread.tags">{{tag}}</span>
+    </div>
+    <h1 class="text-[2rem]">{{thread.title}}</h1>
+    <h2 class="text-sm mb-4 text-zinc-400">author: {{thread.author}}</h2>
+    <p>{{thread.content}}</p>
+
+    <div class="py-12"><hr></div>
+    <app-thread-comments customClasses="mb-4" [commentsId]="thread.commentsId"></app-thread-comments>
+</div>

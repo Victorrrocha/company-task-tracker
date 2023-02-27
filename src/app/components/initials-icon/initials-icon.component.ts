@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class InitialsIconComponent {
   @Input() initials: string = "";
+  @Input() customClasses: string = "";
 }

@@ -1,5 +1,11 @@
-<app-card customClasses="flex-col items-start">
-    <p class="text-lg">{{threadObject?.title}}</p>
-    <p class="text-sm">{{threadObject?.tags}}</p>
-    <p appInteractable class="w-full text-end">{{following ? "Unfollow" : "Follow"}}</p>
+<app-card customClasses="flex-col items-start cursor-pointer" (dblclick)="pushTab()" 
+    routerLink="thread/{{threadObject.id}}">
+    <p class="text-lg">{{threadObject.title}}</p>
+    <!-- <p class="text-sm">{{threadObject.tags}}</p> -->
+    <div class="flex">
+        <span class="bg-secondary p-1 mr-1 text-white rounded text-[12px]" *ngFor="let tag of threadObject.tags.slice(0,3)">{{tag}}</span>
+    </div>
+    <p class="w-full text-end">
+        <span appInteractable>{{following ? "Unfollow" : "Follow"}}</span>
+    </p>
 </app-card>

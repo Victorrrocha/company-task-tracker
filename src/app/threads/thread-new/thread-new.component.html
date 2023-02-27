@@ -1,0 +1,31 @@
+<form class="p-4" [formGroup]="newThreadForm" (ngSubmit)="onSubmit()">
+    <div class="flex flex-col">
+        <label class="text-sm uppercase" for="title">Title</label>
+        <input id="title" type="text" formControlName="title" class="form-input">
+    </div>
+    <div class="flex flex-col mt-2">
+        <label class="text-sm uppercase" for="content">Content</label>
+        <textarea rows="10" id="content" type="text" formControlName="content"></textarea>
+    </div>
+    <div class="flex flex-col mt-2">
+        <label for="tags" class="text-sm uppercase">Tags</label>
+        
+        <div class="flex items-center">
+            <span class="tag bg-secondary p-2 mr-1 text-white rounded text-[12px] my-2 flex items-center" *ngFor="let tag of addedTags">
+                {{tag}} <ng-icon class="tag--remove ml-1" name="cssCloseO"></ng-icon>
+            </span>
+        </div>
+
+        <div class="relative w-full">
+            <input type="text" maxlength="20" id="tags" formControlName="tags" (keyup)="updateMatchedTags()">
+    
+            <div class="tag-dropdown-select" *ngIf="tags.value.length !== 0">
+                <div class="tag-dropdown-option" *ngFor="let matchedTag of matchedTags" (click)="addTag(matchedTag)">{{matchedTag}}</div>
+                <div class="tag-dropdown-option" *ngIf="tagFirstOfItsName()" (click)="addTag()">Create: {{tags.value}}</div>
+            </div>  
+        </div>
+    </div>
+    <div class="flex justify-end mt-4">
+        <button class="px-4 py-3 bg-primary text-white rounded shadow" type="submit">Open Thread</button>
+    </div>
+</form>

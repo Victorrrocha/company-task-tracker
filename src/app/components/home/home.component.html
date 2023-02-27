@@ -1,9 +1,12 @@
-<app-header></app-header>
-<div class="flex">
-    <div class="min-w-[300px]">
-        <app-side-menu></app-side-menu>
+<div class="h-screen flex flex-col">
+    <app-header></app-header>
+    <div class="flex flex-1">
+        <div class="min-w-[300px]">
+            <app-side-menu></app-side-menu>
+        </div>
+        <div class="w-full">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-    <div class="w-full">
-        <app-main></app-main>
-    </div>
+    <app-footer></app-footer>
 </div>
