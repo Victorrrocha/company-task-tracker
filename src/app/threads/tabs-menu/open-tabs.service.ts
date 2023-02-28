@@ -31,7 +31,7 @@ export class OpenTabsService {
     }
   }
 
-  public popTab(tabId: number) { // close
+  public popTab(tabId: string) { // close
     let previousId = 0; // the new tab that will be opened
     this.openTabs = this.openTabs.filter((tab: Tab, index: number) => {
       if (tab.id !== tabId) {

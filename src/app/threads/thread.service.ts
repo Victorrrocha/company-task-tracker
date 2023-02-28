@@ -16,7 +16,7 @@ export class ThreadService {
     return this.threads.slice();
   }
 
-  public getThreadById(id: number) {
+  public getThreadById(id: string) {
     return this.threads.find(thread => thread.id === id);
   }
 

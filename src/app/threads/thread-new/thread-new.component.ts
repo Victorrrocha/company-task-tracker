@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Router } from '@angular/router';
 import { Thread } from '../thread.model';
 import { ThreadService } from '../thread.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-thread-new',
@@ -69,15 +70,14 @@ export class ThreadNewComponent implements OnInit {
     if (this.newThreadForm.valid) {
       const {title, content} = this.newThreadForm.value;
       const tags = this.addedTags;
-      const id = Math.floor(Math.random() * 1000);
+      const id = uuidv4();
       const author = 'Jane Doe'; // Get Current User
       const newThread: Thread = {
         id,
         title,
         content,
         author,
-        tags,
-        commentsId: []
+        tags
       }
       this.threadService.addNewThread(newThread);
       this.clearForm();

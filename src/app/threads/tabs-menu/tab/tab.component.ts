@@ -10,7 +10,7 @@ import { Tab } from './Tab.model';
 })
 export class TabComponent implements OnInit {
   @Input() tabObj: Tab = {
-    id: -1, 
+    id: '', 
     title: '',
     url: ''
   };

@@ -7,7 +7,7 @@ import { CommentsService } from './comments.service';
   styleUrls: ['./thread-comments.component.scss']
 })
 export class ThreadCommentsComponent {
-  @Input() commentsId: number[] | undefined = [];
+  @Input() commentsId: string[] | undefined = [];
   @Input() customClasses: string = '';
   
   constructor() { }

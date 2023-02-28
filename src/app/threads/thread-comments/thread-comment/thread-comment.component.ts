@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ThreadComment } from '../comment.type';
 import { CommentsService } from '../comments.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-thread-comment',
@@ -9,7 +10,7 @@ import { CommentsService } from '../comments.service';
   styleUrls: ['./thread-comment.component.scss']
 })
 export class ThreadCommentComponent {
-  @Input() commentId: number = -1;
+  @Input() commentId: string = '';
   comment: ThreadComment | undefined;
   inReplyMode = false;
   newComment: FormControl = new FormControl('');
@@ -17,7 +18,7 @@ export class ThreadCommentComponent {
 
   constructor(private commentsService: CommentsService) {
     this.commentsService.commentsUpdated
-      .subscribe((id: number) => {
+      .subscribe((id: string) => {
         if (this.commentId === id) { 
           this.comment = this.commentsService.getComment(this.commentId);
           this.hasReplies = !!this.comment?.repliesId.length && this.comment?.repliesId.length  > 0;
@@ -30,14 +31,13 @@ export class ThreadCommentComponent {
     this.hasReplies = !!this.comment?.repliesId.length && this.comment?.repliesId.length  > 0;
   }
 
-  public activateReplyMode(id: number | undefined) {
+  public activateReplyMode(id: number | string | undefined) {
     if (!!id) {
-      this.commentsService.initiateComment(id);
       this.inReplyMode = true;
     }
   }
 
-  public deactivateReplyMode(id: number | undefined) {
+  public deactivateReplyMode(id: number | string | undefined) {
     if (!!id) {
       this.inReplyMode = false;
     }
@@ -45,9 +45,9 @@ export class ThreadCommentComponent {
 
   public postComment() {
     if (!!this.comment) {
-      const newCommentId = Math.floor(Math.random() * 100);
+      const newCommentId = uuidv4();
       const newComment: ThreadComment = {
-        parentId: this.comment.id, 
+        parentId: this.comment.id,
         id: newCommentId,
         author: 'John Doe',
         message: this.newComment.value + '',

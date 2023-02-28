@@ -11,12 +11,11 @@ import { Thread } from '../thread.model';
 export class ThreadCardComponent{
   @Input() following = false;
   @Input() threadObject: Thread = {
-    id: -1,
+    id: '',
     title: '',
     author: '',
     tags: [],
-    content: '',
-    commentsId: []
+    content: ''
   };
   url: string = '';
 

@@ -7,5 +7,11 @@
     <p>{{thread.content}}</p>
 
     <div class="py-12"><hr></div>
-    <app-thread-comments customClasses="mb-4" [commentsId]="thread.commentsId"></app-thread-comments>
+    <div>
+        <textarea [formControl]="commentControl" class="border-zinc-200 border rounded p-2 w-full" rows="3" placeholder="Add a Comment..."></textarea>
+        <div class="flex justify-end mt-2">
+            <button (click)="addComment()" class="px-3 py-2 bg-primary text-white rounded shadow" type="button">Post</button>
+        </div>
+    </div>
+    <app-thread-comments customClasses="mb-4" [commentsId]="commentsId"></app-thread-comments>
 </div>

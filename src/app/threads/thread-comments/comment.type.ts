@@ -1,7 +1,7 @@
 export type ThreadComment = {
-    parentId: number,
-    id: number,
+    parentId: string,
+    id: string,
     author: string,
     message: string,
-    repliesId: number[]
+    repliesId: string[]
 }

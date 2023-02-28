@@ -1,10 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OpenTabsService } from '../tabs-menu/open-tabs.service';
 import { Tab } from '../tabs-menu/tab/Tab.model';
+import { ThreadComment } from '../thread-comments/comment.type';
+import { CommentsService } from '../thread-comments/comments.service';
 import { Thread } from '../thread.model';
 import { ThreadService } from '../thread.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-thread-page',
@@ -15,29 +19,38 @@ export class ThreadPageComponent implements OnDestroy {
   constructor(
     private threadService: ThreadService, 
     private route: ActivatedRoute, 
-    private openTabsService: OpenTabsService) { }
+    private openTabsService: OpenTabsService,
+    private commentsService: CommentsService) { }
   
   pageRouteSubscription: Subscription = Subscription.EMPTY;
-  thread_id: number = -1;
+  commentsUpdatedSubscrition: Subscription = Subscription.EMPTY;
+  commentControl: FormControl = new FormControl('', [Validators.required]);
+  commentsId: string[] = [];
+  thread_id: string = '';
   thread: Thread = {
-    id: -1,
+    id: '',
     title: '',
     author: '',
     tags: [],
-    content: '',
-    commentsId: [],
+    content: ''
   };
   
   ngOnInit(): void {
     this.pageRouteSubscription = this.route.params.subscribe((params: Params) => {
-      this.thread_id = +params['id']
+      this.thread_id = params['id']
       const foundThread = this.threadService.getThreadById(this.thread_id);
 
       if (foundThread) {
         this.thread = foundThread;
+        this.commentsId = this.commentsService.findCommentsById(this.thread_id);
         this.openTab();
       }
-    })
+    });
+
+    this.commentsUpdatedSubscrition = this.commentsService.commentsUpdated
+      .subscribe((id: string) => {
+          this.commentsId = this.commentsService.findCommentsById(this.thread_id);
+      })
   }
 
   openTab() {
@@ -46,6 +59,19 @@ export class ThreadPageComponent implements OnDestroy {
       title: this.thread.title,
     }
     this.openTabsService.selectTab(newTab);
+  }
+
+  addComment() {
+    const newCommentId = uuidv4();
+    const newComment: ThreadComment = {
+      parentId: this.thread_id,
+      id: newCommentId,
+      author: 'John Doe',
+      message: this.commentControl.value + '',
+      repliesId: []
+    }
+    this.commentsService.addComment(newComment);
+    this.commentControl.setValue('');
   }
 
   ngOnDestroy(): void { 

@@ -21,8 +21,10 @@
     "@ng-icons/bootstrap-icons": "^23.1.0",
     "@ng-icons/core": "^23.1.0",
     "@ng-icons/css.gg": "^23.1.0",
+    "@types/uuid": "^9.0.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "uuid": "^9.0.0",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {
