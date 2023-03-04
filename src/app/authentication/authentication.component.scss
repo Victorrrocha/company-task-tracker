@@ -1,0 +1,17 @@
+.in {
+    transition: opacity ease-in 200ms, transform ease-in 250ms;
+    opacity: 1;
+    transform: translateX(0) ;
+    visibility: visible;
+    position: relative;
+    order: 0;
+}  
+
+.out {
+    transition: opacity ease-out 250ms, transform ease-out 250ms;
+    opacity: 0;
+    transform: translateX(-30px);
+    visibility: hidden;
+    order: 1;
+    position: absolute;
+}

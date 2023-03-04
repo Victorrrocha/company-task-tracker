@@ -1,9 +1,9 @@
 <header class="min-h-14 w-screen p-3 bg-primary flex items-center justify-between">
     <div class="flex items-center">
-        <app-initials-icon initials="JD"></app-initials-icon>
+        <app-initials-icon initials="{{initials}}"></app-initials-icon>
         <div class="ml-4">
-            <p class="text-lg">Jane Doe</p>
-            <p class="text-sm">Manager</p>
+            <p class="text-lg">{{username}}</p>
+            <p class="text-sm">{{role}}</p>
         </div>
     </div>
     <ng-icon class="text-[24px]" name="bootstrapBellFill"></ng-icon>

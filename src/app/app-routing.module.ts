@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
+import { AuthenticationComponent } from "./authentication/authentication.component";
 import { HomeComponent } from "./components/home/home.component";
 import { MainComponent } from "./components/main/main.component";
 import { ThreadNewComponent } from "./threads/thread-new/thread-new.component";
@@ -36,6 +37,11 @@ const routes: Routes = [
                 component: UnselectedPageComponent
             },
         ]
+    },
+    {
+        path: 'auth',
+        title: 'Authentication',
+        component: AuthenticationComponent
     },
     {
         path: '**',

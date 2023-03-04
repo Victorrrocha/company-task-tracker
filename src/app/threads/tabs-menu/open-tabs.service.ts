@@ -15,6 +15,10 @@ export class OpenTabsService {
 
   constructor(private router: Router) { }
 
+  public isPermanentlyOpened(id: string): boolean {
+    return !!this.openTabs.find((tab: Tab) => tab.id === id);
+  }
+
   public selectTab(newTab: Tab) { // one click
     if (!this.openTabs.find(tab => tab.id === newTab.id)) {
       this.selectedTab = newTab;

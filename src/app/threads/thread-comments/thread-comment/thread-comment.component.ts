@@ -3,6 +3,8 @@ import { FormControl } from '@angular/forms';
 import { ThreadComment } from '../comment.type';
 import { CommentsService } from '../comments.service';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthenticationService } from 'src/app/authentication/authentication.service';
+import { getInitials } from 'src/app/shared/utils';
 
 @Component({
   selector: 'app-thread-comment',
@@ -15,8 +17,10 @@ export class ThreadCommentComponent {
   inReplyMode = false;
   newComment: FormControl = new FormControl('');
   hasReplies = false;
+  username = "";
+  initials = "";
 
-  constructor(private commentsService: CommentsService) {
+  constructor(private commentsService: CommentsService, private authService: AuthenticationService) {
     this.commentsService.commentsUpdated
       .subscribe((id: string) => {
         if (this.commentId === id) { 
@@ -29,6 +33,9 @@ export class ThreadCommentComponent {
   ngOnInit(): void {
     this.comment = this.commentsService.getComment(this.commentId);
     this.hasReplies = !!this.comment?.repliesId.length && this.comment?.repliesId.length  > 0;
+    if (this.comment) {
+      this.initials = getInitials(this.comment.author);
+    }
   }
 
   public activateReplyMode(id: number | string | undefined) {
@@ -49,7 +56,7 @@ export class ThreadCommentComponent {
       const newComment: ThreadComment = {
         parentId: this.comment.id,
         id: newCommentId,
-        author: 'John Doe',
+        author: this.authService.getLoggedUser() || "??",
         message: this.newComment.value + '',
         repliesId: []
       }

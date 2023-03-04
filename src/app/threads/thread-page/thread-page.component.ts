@@ -26,45 +26,43 @@ export class ThreadPageComponent implements OnDestroy {
   commentsUpdatedSubscrition: Subscription = Subscription.EMPTY;
   commentControl: FormControl = new FormControl('', [Validators.required]);
   commentsId: string[] = [];
-  thread_id: string = '';
-  thread: Thread = {
-    id: '',
-    title: '',
-    author: '',
-    tags: [],
-    content: ''
-  };
+  thread?: Thread;
   
   ngOnInit(): void {
     this.pageRouteSubscription = this.route.params.subscribe((params: Params) => {
-      this.thread_id = params['id']
-      const foundThread = this.threadService.getThreadById(this.thread_id);
-
-      if (foundThread) {
-        this.thread = foundThread;
-        this.commentsId = this.commentsService.findCommentsById(this.thread_id);
+      this.thread = this.threadService.getThreadById(params['id']);
+      if (this.thread) {
+        this.commentsId = this.commentsService.findCommentsById(params['id']);
         this.openTab();
       }
     });
 
     this.commentsUpdatedSubscrition = this.commentsService.commentsUpdated
-      .subscribe((id: string) => {
-          this.commentsId = this.commentsService.findCommentsById(this.thread_id);
+      .subscribe(() => {
+          if (this.thread) {
+            this.commentsId = this.commentsService.findCommentsById(this.thread.id);
+          }
       })
   }
 
   openTab() {
+    if (!this.thread) {
+      return;
+    }
     const newTab: Tab = {
-      id: this.thread_id,
+      id: this.thread.id,
       title: this.thread.title,
     }
     this.openTabsService.selectTab(newTab);
   }
 
   addComment() {
+    if (!this.thread) {
+      return;
+    }
     const newCommentId = uuidv4();
     const newComment: ThreadComment = {
-      parentId: this.thread_id,
+      parentId: this.thread.id,
       id: newCommentId,
       author: 'John Doe',
       message: this.commentControl.value + '',

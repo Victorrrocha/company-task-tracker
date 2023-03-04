@@ -1,5 +1,5 @@
 <div [routerLink]="['/', 'thread', tabObj.id]" routerLinkActive="active"
     class="tab p-2 flex items-center justify-between w-[200px] bg-slate-200 shadow mr-2 cursor-pointer">
-    <p class="truncate">{{tabObj.title}}</p>
+    <p class="truncate" [ngClass]="{'temporary' : temporary}">{{tabObj.title}}</p>
     <ng-icon appInteractable name="cssCloseR" (click)="closeTab()"></ng-icon>
 </div>

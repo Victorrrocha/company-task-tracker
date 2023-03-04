@@ -1,0 +1,53 @@
+<div class="h-screen w-screen bg-primary flex justify-center items-center">
+    <div class="flex flex-col justify-start items-center w-full">
+        <!-- Login -->
+        <div [ngClass]="{'in': !isRegistering, 'out': isRegistering}" class="rounded shadow-lg bg-white p-4 w-[90%] max-w-[350px]"> 
+            <h1 class="text-center">Welcome!</h1>
+            <hr class="my-4">
+            <form class="flex flex-col" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <input 
+                    class="rounded border-2 border-gray-100 p-2 mb-4 w-full" 
+                    type="text" placeholder="Enter your Email or Username"
+                    formControlName="indentification">
+                <input 
+                    class="rounded border-2 border-gray-100 border-gray-800 p-2 mb-4" 
+                    type="password" placeholder="Enter your password"
+                    formControlName="password">
+                <button type="submit" class="bg-primary text-white rounded py-1 mb-3">LOGIN</button>
+                <div class="text-center">
+                    <span appInteractable class="text-sm" (click)="switchMenu()">Register?</span>
+                </div>
+            </form>
+        </div>
+        <!-- Register-->
+        <div  [ngClass]="{'in': isRegistering, 'out': !isRegistering}" class="rounded shadow-lg bg-white p-4 w-[90%] max-w-[350px]">
+            <h1 class="text-center">Create a new account</h1>
+            <hr class="my-4">
+            <form class="flex flex-col" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <input 
+                    class="rounded border-2 border-gray-100 p-2 mb-4 w-full" 
+                    type="text" placeholder="Enter your username"
+                    formControlName="password">
+                <input 
+                    class="rounded border-2 border-gray-100 p-2 mb-4 w-full" 
+                    type="text" placeholder="Enter your email"
+                    formControlName="password">
+                <input 
+                    class="rounded border-2 border-gray-100 border-gray-800 p-2 mb-4" 
+                    type="text" placeholder="Enter your password"
+                    formControlName="password">
+                <select class="rounded border-2 border-gray-100 border-gray-800 p-2 mb-4" name="role" formControlName="role">
+                    <option value="">What's your role here?</option>
+                    <option value="MANAGER">Manager</option>
+                    <option value="DEVELOPER">Developer</option>
+                    <option value="TESTER">Tester</option>
+                </select>
+                <button type="submit" class="bg-primary text-white rounded py-1 mb-3">REGISTER</button>
+                <div class="text-center">
+                    <span appInteractable class="text-sm" (click)="switchMenu()">Login?</span>
+                </div>
+            </form>
+        </div>
+        <!-- TODO maybe add a cool transition between them -->
+    </div>
+</div>

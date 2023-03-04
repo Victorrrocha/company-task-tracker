@@ -14,15 +14,13 @@ export class TabComponent implements OnInit {
     title: '',
     url: ''
   };
-  tabActive = false;
+  temporary = true;
 
   constructor(
-    private openTabsService: OpenTabsService, 
-    private route: ActivatedRoute) {}
+    private openTabsService: OpenTabsService) {}
 
-  
   ngOnInit(): void {
-    
+    this.temporary = !this.openTabsService.isPermanentlyOpened(this.tabObj.id);
   }
   
   closeTab() {

@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ThreadCommentsComponent } from './threads/thread-comments/thread-comments.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { ThreadCommentComponent } from './threads/thread-comments/thread-comment/thread-comment.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ThreadCommentComponent } from './threads/thread-comments/thread-comment
     TabComponent,
     ThreadCommentsComponent,
     FooterComponent,
-    ThreadCommentComponent
+    ThreadCommentComponent,
+    AuthenticationComponent
   ],
   imports: [
     BrowserModule,
