@@ -43,6 +43,10 @@ export class AuthenticationService {
     return this.user.value?.username;
   }
 
+  getUser() {
+    return this.user;
+  }
+
   public logout() {
     this.user.next(null);
   }

@@ -2,9 +2,13 @@
     <app-standard-button routerLink="/thread/new" title="New Thread" iconName="cssAdd"></app-standard-button>
     <div class="h-2"></div>
     <app-searcher></app-searcher>
+    <div class="h-2"></div>
+    <div>
+        <label for="showMineThreads">Show my threads: </label>
+        <input name="showMineThreads" (click)="toggleCheckbox()" type="checkbox" [formControl]="showUserThreads">
+    </div>
     <div class="h-4"></div>
-    
-    <div *ngFor="let thread of threads">
+    <div *ngFor="let thread of showThreads">
         <app-thread-card [threadObject]="thread"></app-thread-card>
         <div class="h-2"></div>
     </div>

@@ -51,7 +51,7 @@ export class ThreadCommentComponent {
   }
 
   public postComment() {
-    if (!!this.comment) {
+    if (!!this.comment && !!this.authService.getLoggedUser()) {
       const newCommentId = uuidv4();
       const newComment: ThreadComment = {
         parentId: this.comment.id,

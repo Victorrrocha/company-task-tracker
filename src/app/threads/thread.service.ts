@@ -1,16 +1,25 @@
-import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Injectable, OnInit } from '@angular/core';
+import { Subject, take } from 'rxjs';
+import { AuthenticationService } from '../authentication/authentication.service';
 import threads from '../data/threads';
+import { User } from '../models/User.model';
 import { Thread } from './thread.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ThreadService {
+export class ThreadService implements OnInit {
   threads: Array<Thread> = threads;
   threadsUpdated = new Subject<Thread[]>();
+  user: User | null = null;
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
+
+  ngOnInit(): void {
+    this.authService.user.subscribe(user => {
+      this.user = user;
+    })
+  }
 
   public getThreads() {
     return this.threads.slice();
@@ -31,5 +40,11 @@ export class ThreadService {
       thread.tags.forEach((tag: string) => tags.add(tag));
     })
     return tags;
+  }
+
+  public getLoggedUserThreads(): Thread[] {
+    return this.threads.filter((thread: Thread) => {
+      return this.user?.threads_id.indexOf(thread.id) !== -1;
+    })
   }
 }
