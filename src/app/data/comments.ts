@@ -26,8 +26,15 @@ export const Comments: ThreadComment[] = [
     {
         parentId: '1',
         id: '45',
-        author: 'Quentin Tarantino',
-        message: 'How much for them feet pics?',
+        author: 'Joel',
+        message: 'Show\'s gonna last 3 weeks',
+        repliesId: ['46']
+    },
+    {
+        parentId: '45',
+        id: '46',
+        author: 'Abed',
+        message: 'Six seasons and a movie!',
         repliesId: []
     }
 ]
