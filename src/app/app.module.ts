@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -13,7 +14,7 @@ import { NgIconsModule } from '@ng-icons/core';
 import { StandardButtonComponent } from './components/standard-button/standard-button.component';
 import { cssAdd, cssCloseR, cssCloseO } from '@ng-icons/css.gg';
 import { SearcherComponent } from './components/searcher/searcher.component';
-import { cssSearch } from '@ng-icons/css.gg';
+import { cssSearch, cssLogOut } from '@ng-icons/css.gg';
 import { CardComponent } from './components/card/card.component';
 import { ThreadCardComponent } from './threads/thread-card/thread-card.component';
 import { InteractableDirective } from './directives/interactable.directive';
@@ -55,7 +56,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    NgIconsModule.withIcons({ bootstrapBellFill, cssAdd, cssSearch, cssCloseO, cssCloseR })
+    HttpClientModule,
+    NgIconsModule.withIcons({ bootstrapBellFill, cssAdd, cssSearch, cssCloseO, cssCloseR, cssLogOut })
   ],
   providers: [],
   bootstrap: [AppComponent]

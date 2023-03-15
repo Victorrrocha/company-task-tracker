@@ -4,7 +4,7 @@ import { ThreadComment } from '../comment.type';
 import { CommentsService } from '../comments.service';
 import { v4 as uuidv4 } from 'uuid';
 import { AuthenticationService } from 'src/app/authentication/authentication.service';
-import { getInitials } from 'src/app/shared/utils';
+import { getInitials } from 'src/app/shared/utils/utils';
 
 @Component({
   selector: 'app-thread-comment',

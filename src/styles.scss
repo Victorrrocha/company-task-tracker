@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'three-dots' with (
+    $dot-color: #7b7b7b
+);
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

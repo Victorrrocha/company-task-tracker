@@ -1,3 +1,14 @@
-<div class="h-full flex justify-center items-center">
+<div class="h-full flex justify-center items-center flex-col relative">
     <img class="w-[400px] h-[400px]" src="../../../assets/svg/undraw_ideas_re_7twj.svg" alt="ideas">
+
+    <div class="quotes">
+        <div class="max-w-2xl text-slate-400 italic mb-4 text-center fadeIn" 
+            *ngIf="quote$ | async as quote; else loading">
+            <p class="text-lg">{{ quote.quote }}</p>
+            <p class="text-sm">{{ quote.author }}</p>
+        </div>
+        <ng-template #loading>
+            <div class="dot-elastic "></div>
+        </ng-template>
+    </div>
 </div>

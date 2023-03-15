@@ -91,5 +91,7 @@ export class ThreadNewComponent implements OnInit {
       content: '',
       tags: ''
     })
+    this.newThreadForm.markAsPending();
+    this.newThreadForm.markAsUntouched();
   }
 }
