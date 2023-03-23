@@ -52,4 +52,12 @@ export class AuthenticationComponent implements OnInit {
   register() {
 
   }
+
+  loginAsGuest() {
+    const user: UserAuth = {
+      usernameOrEmail: 'jane.doe@email.com',
+      password: 'password'
+    }
+    this.authService.login(user);
+  }
 }
